@@ -92,7 +92,6 @@
 														icon="pi pi-sign-in" :loading="loading" v-if="isSignUp" label="Sign up"
 														@click="signUp()" />
 
-
 												</div>
 												<div class="flex justify-around !mt-12 text-sky-700">
 													<button @click="isSignUp = !isSignUp">
@@ -165,6 +164,7 @@
 
 <script setup>
 	import { ref } from "vue";
+
 
 
 	const isSignUp = ref(false);

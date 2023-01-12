@@ -216,11 +216,7 @@
 							<div class="text-center">
 								<HeadlessModal />
 							</div>
-
-							<ClientOnly>
-								<PrimeTable />
-							</ClientOnly>
-
+							<PrimeTable />
 						</div>
 
 					</div>
@@ -248,6 +244,10 @@
 
 	definePageMeta({
 		middleware: 'auth'
+	})
+
+	defineComponent({
+
 	})
 
 

@@ -1,11 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-	modules: [
-		"@nuxtjs/tailwindcss",
-		"@nuxtjs/supabase",
-		"@nuxtjs/color-mode",
-		"nuxt-headlessui",
-	],
+	modules: ["@nuxtjs/tailwindcss", "@nuxtjs/supabase", "nuxt-headlessui"],
 	runtimeConfig: {
 		supabaseKey: process.env.SUPABASE_KEY,
 		supabaseUri: process.env.SUPABASE_URL,
@@ -31,7 +26,6 @@ export default defineNuxtConfig({
 		minify: true,
 	},
 	ssr: true,
-
 	app: {
 		head: {
 			title: "Coinbend - Get a hold of your spendings",
