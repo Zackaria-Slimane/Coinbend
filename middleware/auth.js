@@ -3,13 +3,16 @@ export default defineNuxtRouteMiddleware((to) => {
 	const user = useSupabaseUser();
 
 	if (!user.value && to.path === "/dashboard") {
-		return navigateTo("/");
+		navigateTo("/");
+	}
+	if (!user.value && to.path === "/test") {
+		navigateTo("/");
 	}
 	if (!user.value && to.path === "/account") {
-		return navigateTo("/");
+		navigateTo("/");
 	}
 	if (user.value && to.path === "/") {
-		return navigateTo("/dashboard");
+		navigateTo("/dashboard");
 	}
 
 	client.auth.onAuthStateChange((event, session) => {

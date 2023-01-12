@@ -216,7 +216,7 @@
 							<div class="text-center">
 								<HeadlessModal />
 							</div>
-							<PrimeTable />
+							<CellTable />
 						</div>
 
 					</div>
@@ -239,15 +239,11 @@
 <script setup>
 	import { ref } from 'vue'
 	import { Dialog, DialogPanel, TransitionChild, TransitionRoot, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
-	import { CalendarIcon, ChartBarIcon, FolderIcon, HomeIcon, InboxIcon, XMarkIcon, Bars3Icon } from '@heroicons/vue/24/outline/index.js'
+	import { ChartBarIcon, FolderIcon, HomeIcon, InboxIcon, XMarkIcon, Bars3Icon } from '@heroicons/vue/24/outline/index.js'
 
 
 	definePageMeta({
 		middleware: 'auth'
-	})
-
-	defineComponent({
-
 	})
 
 
@@ -280,11 +276,6 @@
 			icon: InboxIcon,
 			current: false,
 			children: []
-		},
-		{
-			name: 'Calendar',
-			icon: CalendarIcon,
-			current: false,
 		},
 		{
 			name: 'Reports',

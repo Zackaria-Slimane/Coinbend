@@ -1,4 +1,3 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
 <template>
   <div class="mt-24 px-4 sm:px-6 lg:px-8">
     <div class="sm:flex sm:items-center">
