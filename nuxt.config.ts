@@ -27,6 +27,7 @@ export default defineNuxtConfig({
 	},
 	ssr: true,
 	app: {
+		pageTransition: { name: "page", mode: "out-in", type: "transition" },
 		head: {
 			title: "Coinbend - Get a hold of your spendings",
 			htmlAttrs: {

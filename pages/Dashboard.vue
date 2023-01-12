@@ -261,6 +261,7 @@
 		setTimeout(() => {
 			if (!error) {
 				navigateTo('/')
+				$showToast(`Safekeeping your money until next time !`, "info", 3500);
 			}
 		}, 1000);
 	}

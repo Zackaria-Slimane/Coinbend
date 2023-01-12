@@ -3,15 +3,12 @@ export default defineNuxtRouteMiddleware((to) => {
 	const user = useSupabaseUser();
 
 	if (!user.value && to.path === "/dashboard") {
-		console.log("auth middleware redirect to /");
 		return navigateTo("/");
 	}
 	if (!user.value && to.path === "/account") {
-		console.log("auth middleware redirect to /");
 		return navigateTo("/");
 	}
 	if (user.value && to.path === "/") {
-		console.log("auth middleware redirect to /dashboard");
 		return navigateTo("/dashboard");
 	}
 

@@ -1,6 +1,6 @@
 <template>
 	<Popover id="nav-section" class="appHeader z-50">
-		<nav class="relative mx-auto flex max-w-full items-center justify-between px-6 sm:px-16"
+		<nav class=" mx-auto flex max-w-full items-center justify-between px-6 sm:px-16"
 			aria-label="Global">
 			<div class="flex flex-1 items-center">
 				<div class="flex w-full items-center justify-between md:w-auto">
@@ -67,12 +67,8 @@
 	import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 	import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline/index.js'
 
-
-
 	const supaAuth = useSupabaseAuthClient()
 	const user = useSupabaseUser()
-
-
 
 	const signOut = async () => {
 		const { error } = await supaAuth.auth.signOut();
