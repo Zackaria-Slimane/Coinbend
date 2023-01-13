@@ -4,12 +4,6 @@
 			<HeaderSection />
 			<main>
 				<HeroSection />
-
-				<ClientOnly>
-					<LazyFeaturesSection v-if="showcase" />
-					<LazyBlogSection v-if="showcase" />
-				</ClientOnly>
-
 			</main>
 			<FooterSection class="h-fit min-h-full" />
 		</div>
@@ -23,7 +17,6 @@
 	definePageMeta({
 		middleware: [ 'auth' ]
 	})
-
 </script>
 
 <style>

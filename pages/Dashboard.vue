@@ -216,7 +216,7 @@
 							<div class="text-center">
 								<HeadlessModal />
 							</div>
-							<CellTable />
+							<ReorderRow class="my-12" />
 						</div>
 
 					</div>
@@ -245,6 +245,7 @@
 	definePageMeta({
 		middleware: 'auth'
 	})
+
 
 
 	const supaAuth = useSupabaseAuthClient()

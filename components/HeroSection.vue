@@ -2,7 +2,7 @@
 	<div class="h-full min-h-screen">
 
 		<div class="overflow-hidden">
-			<div class="hidden sm:block" aria-hidden="true">
+			<div class="hidden sm:block -z-50" aria-hidden="true">
 				<svg
 					class="absolute bottom-0 right-0 mb-40 translate-x-1/2 transform text-gray-700 lg:mt-28 lg:mb-0 xl:translate-x-0 xl:transform-none"
 					width="244" height="268" viewBox="0 0 364 384" fill="none">
@@ -24,7 +24,7 @@
 			<div class="pt-2 pb-16 sm:pb-24">
 				<main class="mt-10">
 					<div class="mx-auto max-w-7xl">
-						<div class="lg:grid lg:grid-cols-12 lg:gap-8">
+						<div class="lg:grid lg:grid-cols-12 lg:gap-8 z-50">
 							<!-- hero start-->
 							<div
 								class="px-4 sm:px-6 sm:text-center md:mx-auto md:max-w-2xl lg:col-span-6 lg:flex lg:items-center lg:text-left">
