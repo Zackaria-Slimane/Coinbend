@@ -250,6 +250,13 @@
 	const user = useSupabaseUser()
 	const { $showToast } = useNuxtApp();
 
+	function siteAlert () {
+		setTimeout(() => {
+			$showToast(`Under construction, please bear with us`, "warning", 10000);
+		}, 3500)
+	}
+
+
 
 	const signOut = async () => {
 		const { error } = await supaAuth.auth.signOut();
@@ -288,6 +295,8 @@
 	]
 
 	const sidebarOpen = ref(false)
+	siteAlert()
+
 </script>
 
 <style scoped>
