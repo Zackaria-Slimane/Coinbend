@@ -11,9 +11,6 @@
 </template>
 
 <script setup>
-	import { ref } from 'vue';
-	const showcase = ref(false)
-
 	definePageMeta({
 		middleware: [ 'auth' ]
 	})

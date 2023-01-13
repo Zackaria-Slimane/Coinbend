@@ -246,8 +246,6 @@
 		middleware: 'auth'
 	})
 
-
-
 	const supaAuth = useSupabaseAuthClient()
 	const user = useSupabaseUser()
 	const { $showToast } = useNuxtApp();
