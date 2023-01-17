@@ -223,7 +223,7 @@
 					<!-- End main area -->
 				</main>
 				<aside
-					class="relative hidden w-96 flex-shrink-0 overflow-y-auto border-l border-gray-200 xl:flex xl:flex-col">
+					class="relative hidden w-80 flex-shrink-0 overflow-y-auto border-l border-gray-200 xl:flex xl:flex-col">
 					<!-- Start secondary column (hidden on smaller screens) -->
 					<div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
 						<div class="h-full rounded-lg border-2 border-solid border-gray-200" />
