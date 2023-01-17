@@ -202,4 +202,8 @@
 tr:focus {
   outline: 0.15rem solid lightskyblue !important;
 }
+
+.p-progressbar-value {
+  background: rgb(43, 188, 43) !important;
+}
 </style>
