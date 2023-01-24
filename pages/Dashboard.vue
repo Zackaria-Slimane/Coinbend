@@ -212,11 +212,21 @@
 					<!-- Start main area-->
 					<div class=" py-6 px-4 sm:px-6 lg:px-8">
 						<div class="h-full rounded-lg border-2 border-solid border-gray-200">
-							<h1 class="text-center text-sky-500 mt-8 text-xl">Logged in as : {{ userName }}</h1>
-							<div class="text-center">
-								<HeadlessModal />
+							<div class="border-b-2 flex justify-between align-middle items-center mx-8">
+								<div class="my-8">
+									<PrimeBtn label="Add Income"
+										class="p-button-sm p-button-rounded p-button-info p-button-outlined p-1 h-10 !mr-8"
+										icon="pi pi-money-bill" />
+									<PrimeBtn label="Add expense"
+										class="p-button-sm p-button-rounded p-button-info p-button-outlined p-1 h-10"
+										icon="pi pi-dollar" />
+								</div>
+								<h1 class="text-center ml-8 my-8 text-xl">Available to spend : <span
+										class="text-green-500"> 100000 </span>
+									$
+								</h1>
 							</div>
-							<ReorderRow class="my-12" />
+							<MainTable class="my-12" />
 						</div>
 
 					</div>
@@ -237,7 +247,7 @@
 </template>
 
 <script setup>
-	import { ref } from 'vue'
+	import { ref, onMounted } from 'vue'
 	import { Dialog, DialogPanel, TransitionChild, TransitionRoot, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 	import { ChartBarIcon, FolderIcon, HomeIcon, InboxIcon, XMarkIcon, Bars3Icon } from '@heroicons/vue/24/outline/index.js'
 
@@ -250,26 +260,23 @@
 	const user = useSupabaseUser()
 	const { $showToast } = useNuxtApp();
 
-	function siteAlert () {
+	onMounted(() => {
 		setTimeout(() => {
 			$showToast(`Under construction, please bear with us`, "warning", 10000);
 		}, 3500)
-	}
-
-
+	})
 
 	const signOut = async () => {
 		const { error } = await supaAuth.auth.signOut();
 		setTimeout(() => {
 			if (!error) {
-				navigateTo('/')
+				navigateTo('/');
 				$showToast(`Safekeeping your money until next time !`, "info", 3500);
 			}
 		}, 1000);
 	}
 
 
-	const userName = user?.value?.email
 	const navigation = [
 		{ name: 'Dashboard', icon: HomeIcon, current: true, href: '#' },
 		{
@@ -295,7 +302,6 @@
 	]
 
 	const sidebarOpen = ref(false)
-	siteAlert()
 
 </script>
 
