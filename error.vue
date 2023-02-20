@@ -8,8 +8,15 @@
 </template>
 
 <script setup>
+	const user = useSupabaseUser();
+	let handleClearError
 
 	defineProps([ 'error' ])
-	const handleClearError = () => clearError({ redirect: '/' })
+
+	if (user.value) {
+		handleClearError = () => clearError({ redirect: '/dashboard' })
+	} else {
+		handleClearError = () => clearError({ redirect: '/' })
+	}
 
 </script>

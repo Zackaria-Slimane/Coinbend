@@ -58,8 +58,8 @@
 												</svg>
 											</DisclosureButton>
 											<DisclosurePanel class="space-y-1">
-												<DisclosureButton v-for="subItem in item.children" :key="subItem.name"
-													as="a" :href="subItem.href"
+												<DisclosureButton v-for="subItem in item.children" :key="subItem.name" as="a"
+													:href="subItem.href"
 													class="group flex w-full items-center rounded-md py-2 pl-11 pr-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900">
 													{{ subItem.name }}</DisclosureButton>
 											</DisclosurePanel>
@@ -72,8 +72,8 @@
 									<div class="flex items-center">
 										<div>
 											<img v-if="user.user_metadata.picture"
-												class="inline-block h-10 w-10 rounded-full"
-												:src="user.user_metadata.picture" alt=" user profile picture" />
+												class="inline-block h-10 w-10 rounded-full" :src="user.user_metadata.picture"
+												alt=" user profile picture" />
 											<img v-else class="inline-block h-10 w-10 rounded-full"
 												src="@/assets/images/blank.png" alt=" user profile picture" />
 										</div>
@@ -81,8 +81,7 @@
 											<p v-if="user.user_metadata.name"
 												class="text-base font-medium text-gray-700 group-hover:text-gray-900">
 												{{ user.user_metadata.name }}</p>
-											<p v-else
-												class="text-base font-medium text-gray-700 group-hover:text-gray-900">
+											<p v-else class="text-base font-medium text-gray-700 group-hover:text-gray-900">
 												{{ user.email }}</p>
 											<NuxtLink to="/account"
 												class="text-sm font-medium text-sky-500 hover:text-gray-700">View
@@ -213,16 +212,14 @@
 					<div class=" py-6 px-4 sm:px-6 lg:px-8">
 						<div class="h-full rounded-lg border-2 border-solid border-gray-200">
 							<div class="border-b-2 flex justify-between align-middle items-center mx-8">
-								<div class="my-8">
-									<PrimeBtn label="Add Income"
-										class="p-button-sm p-button-rounded p-button-info p-button-outlined p-1 h-10 !mr-8"
-										icon="pi pi-money-bill" />
-									<PrimeBtn label="Add expense"
-										class="p-button-sm p-button-rounded p-button-info p-button-outlined p-1 h-10"
-										icon="pi pi-dollar" />
+								<div class="my-8 flex gap-3">
+
+									<TargetModal />
+									<ExpenseModal />
+
 								</div>
 								<h1 class="text-center ml-8 my-8 text-xl">Available to spend : <span
-										class="text-green-500"> 100000 </span>
+										class="text-blue-500"> ............ </span>
 									$
 								</h1>
 							</div>

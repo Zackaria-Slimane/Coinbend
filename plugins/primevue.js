@@ -7,8 +7,8 @@ import Dropdown from "primevue/dropdown";
 import Checkbox from "primevue/checkbox";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
-import ColumnGroup from "primevue/columngroup"; //optional for column grouping
-import Row from "primevue/row"; //optional for row
+import ColumnGroup from "primevue/columngroup";
+import Row from "primevue/row";
 import Badge from "primevue/badge";
 import ProgressBar from "primevue/progressbar";
 import Toolbar from "primevue/toolbar";
