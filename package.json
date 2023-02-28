@@ -17,6 +17,8 @@
 	},
 	"dependencies": {
 		"@heroicons/vue": "^2.0.13",
+		"@pinia/nuxt": "^0.4.7",
+		"pinia": "^2.0.32",
 		"primeicons": "^6.0.1",
 		"primevue": "^3.21.0",
 		"vue-toastification": "^2.0.0-rc.5"

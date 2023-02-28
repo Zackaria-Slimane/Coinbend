@@ -8,15 +8,17 @@
 </template>
 
 <script setup>
-	const user = useSupabaseUser();
-	let handleClearError
+import { useTarget } from './composables/states';
 
-	defineProps([ 'error' ])
+const user = useSupabaseUser();
+let handleClearError
 
-	if (user.value) {
-		handleClearError = () => clearError({ redirect: '/dashboard' })
-	} else {
-		handleClearError = () => clearError({ redirect: '/' })
-	}
+defineProps(['error'])
+
+if (user.value) {
+	handleClearError = () => clearError({ redirect: '/dashboard' })
+} else {
+	handleClearError = () => clearError({ redirect: '/' })
+}
 
 </script>
