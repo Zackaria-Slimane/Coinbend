@@ -65,9 +65,9 @@
 
 												<div>
 													<label for="password" class="sr-only">Password</label>
-													<input id="password" name="password" type="password"
-														placeholder="Password" autocomplete="current-password"
-														v-model="userPass" @keypress.enter.prevent="login()"
+													<input id="password" name="password" type="password" placeholder="Password"
+														autocomplete="current-password" v-model="userPass"
+														@keypress.enter.prevent="login()"
 														class="block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 !sm:text-sm" />
 												</div>
 
@@ -94,7 +94,7 @@
 														{{
 															isSignUp
 															? "Already have an account? Log In"
-																: "Don't have an account yet? Sign Up"
+															: "Don't have an account yet? Sign Up"
 														}}
 													</button>
 												</div>
@@ -136,16 +136,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="border-t-2 border-gray-200 bg-gray-50 px-4 py-6 sm:px-10 hidden">
-										<p class="text-xs leading-5 text-gray-500">
-											By signing up, you agree to our
-											<a href="#" class="font-medium text-gray-900 hover:underline">Terms</a>,
-											<a href="#" class="font-medium text-gray-900 hover:underline">Data Policy</a>
-											and
-											<a href="#" class="font-medium text-gray-900 hover:underline">Cookies
-												Policy</a>.
-										</p>
-									</div>
+
 								</div>
 							</div>
 							<!-- form end-->
