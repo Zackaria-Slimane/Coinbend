@@ -15,11 +15,10 @@
 </template>
 
 <script setup>
-  import { reactive } from 'vue';
   import { useBudget } from '~~/stores/budgetStore';
   const budgetData = useBudget()
 
-  const data = reactive(budgetData.getBudget)
+  const data = budgetData.getBudget
 
   defineProps({
     targetName: String,

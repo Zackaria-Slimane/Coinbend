@@ -233,9 +233,6 @@
 								</div>
 							</div>
 							<MainTable class="my-12" />
-							<div class="container text-center">
-								<TargetItem />
-							</div>
 						</div>
 
 					</div>
