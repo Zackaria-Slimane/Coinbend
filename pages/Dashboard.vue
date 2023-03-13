@@ -72,29 +72,27 @@
 								<a href="#" class="group block flex-shrink-0">
 									<div class="flex items-center">
 										<div>
-											<img v-if="user.user_metadata.picture"
-												class="inline-block h-10 w-10 rounded-full" :src="user.user_metadata.picture"
+											<img v-if="user?.user_metadata?.picture"
+												class="inline-block h-10 w-10 rounded-full" :src="user?.user_metadata?.picture"
 												alt=" user profile picture" />
 											<img v-else class="inline-block h-10 w-10 rounded-full"
 												src="@/assets/images/blank.png" alt=" user profile picture" />
 										</div>
 										<div class="ml-3">
-											<p v-if="user.user_metadata.name"
+											<p v-if="user?.user_metadata?.name"
 												class="text-base font-medium text-gray-700 group-hover:text-gray-900">
-												{{ user.user_metadata.name }}
+												{{ user.user_metadata.name ?? 'Welcome back' }}
 											</p>
 											<p v-else class="text-base font-medium text-gray-700 group-hover:text-gray-900">
-												{{ user.email }}
+												{{ user.email ?? 'Welcome back' }}
 											</p>
 											<NuxtLink to="/account"
 												class="text-sm font-medium text-sky-500 hover:text-gray-700">
-												View
-												profile</NuxtLink>
+												View profile</NuxtLink>
 											<div>
 												<button @click="signOut()"
 													class="text-sm font-medium text-sky-500 hover:text-gray-700">
-													Log
-													out
+													Log out
 												</button>
 											</div>
 										</div>
@@ -160,28 +158,26 @@
 						<a href="#" class="group block flex-shrink-0">
 							<div class="flex items-center">
 								<div>
-									<img v-if="user.user_metadata.picture" class="inline-block h-10 w-10 rounded-full"
-										:src="user.user_metadata.picture" alt=" user profile picture" />
+									<img v-if="user?.user_metadata?.picture" class="inline-block h-10 w-10 rounded-full"
+										:src="user?.user_metadata?.picture" alt=" user profile picture" />
 									<img v-else class="inline-block h-10 w-10 rounded-full"
 										src="@/assets/images/blank.png" alt=" user profile picture" />
 								</div>
 								<div class="ml-3">
-									<p v-if="user.user_metadata.name"
+									<p v-if="user?.user_metadata?.name"
 										class="text-base font-medium text-gray-700 group-hover:text-gray-900">
-										{{ user.user_metadata.name }}
+										{{ user.user_metadata.name ?? 'Welcome back' }}
 									</p>
 									<p v-else class="text-base font-medium text-gray-700 group-hover:text-gray-900">
-										{{ user.email }}
+										{{ user.email ?? ' Welcome back' }}
 									</p>
 									<NuxtLink to="/account"
 										class="text-sm font-medium text-sky-500 hover:text-gray-700">
-										View
-										profile</NuxtLink>
+										View profile</NuxtLink>
 									<div>
 										<button @click="signOut()"
 											class="text-sm font-medium text-sky-500 hover:text-gray-700">
-											Log
-											out
+											Log out
 										</button>
 									</div>
 								</div>
@@ -223,12 +219,16 @@
 						<div class="h-full rounded-lg border-2 border-solid border-gray-200">
 							<div class="border-b-2 flex justify-between align-middle items-center mx-8">
 								<div class="my-8 flex gap-2">
+									<IncomeModal/>
 									<TargetModal />
 									<ExpenseModal />
 								</div>
 								<div>
 									<p>
-										Welcome back <span class="text-blue-500 mx-2">{{ user.email }}</span> !
+										Welcome back <span class="text-blue-500 mx-2">{{ user.email ?? ' ' }}</span> !
+									</p>
+									<p>
+										You have <span :class="[budgetAmount <= 0 ? 'text-rose-500' : 'text-green-500']"> {{ budgetAmount }} </span>  left to spend !
 									</p>
 								</div>
 							</div>
@@ -255,61 +255,64 @@
 </template>
 
 <script setup>
-	import { ref, onMounted } from 'vue'
-	import { Dialog, DialogPanel, TransitionChild, TransitionRoot, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
-	import { ChartBarIcon, FolderIcon, HomeIcon, InboxIcon, XMarkIcon, Bars3Icon } from '@heroicons/vue/24/outline/index.js'
+import { ref, onMounted } from 'vue'
+import { Dialog, DialogPanel, TransitionChild, TransitionRoot, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
+import { ChartBarIcon, FolderIcon, HomeIcon, InboxIcon, XMarkIcon, Bars3Icon } from '@heroicons/vue/24/outline/index.js'
+import { useBudget } from '~~/stores/budgetStore';
+
+definePageMeta({
+	middleware: 'auth'
+})
+
+const supaAuth = useSupabaseAuthClient()
+const user = useSupabaseUser()
+const { $showToast } = useNuxtApp();
+
+const budgetStore = useBudget()
+let budgetAmount = budgetStore.getIncome ?? 0
+
+onMounted(() => {
+	setTimeout(() => {
+		$showToast(`Under construction, please bear with us`, "warning", 5000);
+	}, 3500)
+})
+
+const signOut = async () => {
+	const { error } = await supaAuth.auth.signOut();
+	setTimeout(() => {
+		if (!error) {
+			navigateTo('/');
+			$showToast(`Safekeeping your money until next time !`, "info", 3500);
+		}
+	}, 1000);
+}
 
 
-	definePageMeta({
-		middleware: 'auth'
-	})
+const navigation = [
+	{ name: 'Dashboard', icon: HomeIcon, current: true, href: '#' },
+	{
+		name: 'Budget',
+		icon: FolderIcon,
+		current: false,
+	},
+	{
+		name: 'Accounts',
+		icon: InboxIcon,
+		current: false,
+		children: []
+	},
+	{
+		name: 'Reports',
+		icon: ChartBarIcon,
+		current: false,
+		children: [
+			{ name: 'Overview', href: '#' },
+			{ name: 'Settings', href: '#' },
+		],
+	},
+]
 
-	const supaAuth = useSupabaseAuthClient()
-	const user = useSupabaseUser()
-	const { $showToast } = useNuxtApp();
-
-	onMounted(() => {
-		setTimeout(() => {
-			$showToast(`Under construction, please bear with us`, "warning", 5000);
-		}, 3500)
-	})
-
-	const signOut = async () => {
-		const { error } = await supaAuth.auth.signOut();
-		setTimeout(() => {
-			if (!error) {
-				navigateTo('/');
-				$showToast(`Safekeeping your money until next time !`, "info", 3500);
-			}
-		}, 1000);
-	}
-
-
-	const navigation = [
-		{ name: 'Dashboard', icon: HomeIcon, current: true, href: '#' },
-		{
-			name: 'Budget',
-			icon: FolderIcon,
-			current: false,
-		},
-		{
-			name: 'Accounts',
-			icon: InboxIcon,
-			current: false,
-			children: []
-		},
-		{
-			name: 'Reports',
-			icon: ChartBarIcon,
-			current: false,
-			children: [
-				{ name: 'Overview', href: '#' },
-				{ name: 'Settings', href: '#' },
-			],
-		},
-	]
-
-	const sidebarOpen = ref(false)
+const sidebarOpen = ref(false)
 
 </script>
 

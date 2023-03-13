@@ -39,8 +39,8 @@ const loading = ref(true);
 const columns = [
 	{ field: "targetName", header: "Name" },
 	{ field: "targetAmount", header: "Target" },
-	{ field: "saved", header: "Saved" },
-	{ field: "progress", header: "Progress" },
+	{ field: "targetSaved", header: "Saved" },
+	{ field: "targetSaved", header: "Progress" },
 ];
 
 const budgetStore = useBudget()

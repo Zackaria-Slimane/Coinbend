@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref } from 'vue';
 import { useBudget } from '~~/stores/budgetStore';
 
 const { $showToast } = useNuxtApp();
@@ -50,6 +50,7 @@ const storeBudget = useBudget()
 const budget = {
 	targetName: null,
 	targetAmount: null,
+	targetSaved: null,
 }
 
 const displayModal = ref(false);
@@ -59,6 +60,7 @@ const openModal = () => {
 	budget.targetName = null
 	budget.targetAmount = null
 };
+
 const closeModal = () => {
 	displayModal.value = false;
 };
@@ -66,6 +68,8 @@ const closeModal = () => {
 const saveTarget = () => {
 	if (budget.targetName && budget.targetAmount) {
 		$showToast(`Budget for  : ${budget.targetName} added !`, "success", 2500);
+		budget.targetSaved = budget.targetAmount
+
 		storeBudget.setBudget(budget)
 		closeModal()
 	}
@@ -73,8 +77,5 @@ const saveTarget = () => {
 		$showToast(`Please fill you target details`, "warning", 5000);
 	}
 }
-
-
-
 
 </script>
