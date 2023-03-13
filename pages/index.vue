@@ -18,8 +18,6 @@
 
 <style>
 #landing {
-	padding: 0;
-	margin: 0;
 	background-color: #ace0f9;
 	background-image: linear-gradient(135deg,
 			#fff1eb 0%,
