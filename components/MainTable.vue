@@ -21,8 +21,8 @@
 
 			<PrimeCol :header="columns[3].header" :field="columns[3].field">
 				<template #body="slotProps">
-					<PrimeBar :value="slotProps.data.progress" style="height: .5em"
-						:showValue="true" />
+					<PrimeBar :value="100" style="height: .5em"
+						:showValue="false" />
 				</template>
 			</PrimeCol>
 

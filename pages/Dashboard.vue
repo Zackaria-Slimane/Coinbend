@@ -219,8 +219,8 @@
 						<div class="h-full rounded-lg border-2 border-solid border-gray-200">
 							<div class="border-b-2 flex justify-between align-middle items-center mx-8">
 								<div class="my-8 flex gap-2">
-									<IncomeModal/>
-									<TargetModal />
+									<IncomeModal @add-income="getIncome"/>
+									<TargetModal @refresh-income="refreshIncome" />
 									<ExpenseModal />
 								</div>
 								<div>
@@ -228,7 +228,7 @@
 										Welcome back <span class="text-blue-500 mx-2">{{ user.email ?? ' ' }}</span> !
 									</p>
 									<p>
-										You have <span :class="[budgetAmount <= 0 ? 'text-rose-500' : 'text-green-500']"> {{ budgetAmount }} </span>  left to spend !
+										You have <span :class="[budgetAmount <= 0 ? 'text-rose-500' : 'text-green-500']"> {{ budgetAmount ?? 0 }} </span>  left to spend !
 									</p>
 								</div>
 							</div>
@@ -238,16 +238,14 @@
 					</div>
 					<!-- End main area -->
 				</main>
-				<aside
+				<!-- <aside
 					class="relative hidden w-80 flex-shrink-0 overflow-y-auto border-l border-gray-200 xl:flex xl:flex-col">
-					<!-- Start secondary column (hidden on smaller screens) -->
 					<div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
 						<div class="h-full rounded-lg border-2 border-solid border-gray-200">
 							<h1 class="text-center text-blue-500 p-3 border-b-2"> History </h1>
 						</div>
 					</div>
-					<!-- End secondary column -->
-				</aside>
+				</aside> -->
 			</div>
 			<!-- main content -->
 		</div>
@@ -258,7 +256,7 @@
 import { ref, onMounted } from 'vue'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { ChartBarIcon, FolderIcon, HomeIcon, InboxIcon, XMarkIcon, Bars3Icon } from '@heroicons/vue/24/outline/index.js'
-import { useBudget } from '~~/stores/budgetStore';
+import { useBudget } from '~~/stores/budgetStore'
 
 definePageMeta({
 	middleware: 'auth'
@@ -269,7 +267,7 @@ const user = useSupabaseUser()
 const { $showToast } = useNuxtApp();
 
 const budgetStore = useBudget()
-let budgetAmount = budgetStore.getIncome ?? 0
+let budgetAmount = ref(budgetStore.getIncome)
 
 onMounted(() => {
 	setTimeout(() => {
@@ -313,6 +311,13 @@ const navigation = [
 ]
 
 const sidebarOpen = ref(false)
+
+function getIncome(){
+	budgetAmount.value = budgetStore.getIncome
+}
+function refreshIncome(){
+	budgetAmount.value = budgetStore.getLeftToSpend
+}
 
 </script>
 

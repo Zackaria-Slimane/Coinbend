@@ -27,7 +27,7 @@
 					<PrimeBtn label="Cancel" icon="pi pi-times" @click="closeModal"
 						class="p-button-text p-button-danger p-button-sm" />
 					<PrimeBtn label="Save" class="p-button-sm p-button-raised  p-button-info" icon=" pi pi-check"
-						@click="saveIncome" autofocus />
+						@click="saveIncome"  autofocus />
 				</template>
 			</PrimeModal>
 		</div>
@@ -38,8 +38,12 @@
 import { ref } from 'vue';
 import { useBudget } from '~~/stores/budgetStore';
 
+
 const { $showToast } = useNuxtApp();
 const storeBudget = useBudget()
+
+const emit = defineEmits(['add-income'])
+
 
 const income = ref(null)
 
@@ -47,7 +51,7 @@ const displayModal = ref(false);
 
 const openModal = () => {
 	displayModal.value = true;
-	income = null
+	income.value = null
 };
 
 const closeModal = () => {
@@ -55,9 +59,10 @@ const closeModal = () => {
 };
 
 const saveIncome = () => {
-	if (income.value > 0 ) {
+	if (income.value) {
 		$showToast(`Income of  : ${income.value} saved !`, "success", 2500);
 		storeBudget.setIncome(income.value)
+		emit('add-income')
 		closeModal()
 	}
 	else {

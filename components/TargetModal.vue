@@ -46,6 +46,7 @@ import { useBudget } from '~~/stores/budgetStore';
 
 const { $showToast } = useNuxtApp();
 const storeBudget = useBudget()
+const emit = defineEmits(['refresh-income'])
 
 const budget = {
 	targetName: null,
@@ -69,8 +70,8 @@ const saveTarget = () => {
 	if (budget.targetName && budget.targetAmount) {
 		$showToast(`Budget for  : ${budget.targetName} added !`, "success", 2500);
 		budget.targetSaved = budget.targetAmount
-
 		storeBudget.setBudget(budget)
+		emit('refresh-income')
 		closeModal()
 	}
 	else {
