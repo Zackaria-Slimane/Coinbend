@@ -14,6 +14,7 @@ import ProgressBar from "primevue/progressbar";
 import Toolbar from "primevue/toolbar";
 import RadioButton from "primevue/radiobutton";
 import InputNumber from "primevue/inputnumber";
+import Timeline from 'primevue/timeline';
 
 export default defineNuxtPlugin((nuxtApp) => {
 	nuxtApp.vueApp.use(PrimeVue, { ripple: true });
@@ -31,4 +32,5 @@ export default defineNuxtPlugin((nuxtApp) => {
 	nuxtApp.vueApp.component("Toolbar", Toolbar);
 	nuxtApp.vueApp.component("PrimeRadio", RadioButton);
 	nuxtApp.vueApp.component("PrimeNumber", InputNumber);
+	nuxtApp.vueApp.component("PrimeTimeLine", Timeline);
 });

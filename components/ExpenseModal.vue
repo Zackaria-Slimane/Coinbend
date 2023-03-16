@@ -13,7 +13,7 @@
 									<div class="grid grid-cols-3 gap-6">
 										<div class="col-span-3">
 											<label for="expense-name" class="block text-sm font-medium text-gray-700">Name</label>
-											<input type="text" v-model.lazy="expenseName" name="expense-name" id="expense-name"
+											<input type="text" v-model.lazy="expense.expenseName" name="expense-name" id="expense-name"
 												autocomplete="expenseName" placeholder="Groceries , gas , food etc.."
 												class="mt-1 block w-full rounded-md border-sky-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm" />
 										</div>
@@ -21,7 +21,7 @@
 										<div class="col-span-3">
 											<label for="expense-amount" class="block text-sm font-medium text-gray-700">Amount
 											</label>
-											<input type="number" v-model.lazy="expenseAmount" name="expense-amount" id="expense-amount"
+											<input type="number" v-model.lazy="expense.expenseAmount" name="expense-amount" id="expense-amount"
 												placeholder="100 $ , 50 DH etc..."
 												class="mt-1 block w-full rounded-md border-sky-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm" />
 										</div>
@@ -29,9 +29,9 @@
 										<div class="col-span-3">
 											<label for="relatedTarget" class="block text-sm font-medium text-gray-700">Deduct from
 											</label>
-											<select id="relatedTarget" name="relatedTarget" autocomplete="target-name"
+											<select v-model="expense.relatedTarget" id="relatedTarget" name="relatedTarget" autocomplete="target-name"
 												class="mt-1 block w-full rounded-md border border-sky-300 bg-white py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm">
-												<option v-for="target in target" :value="target" :key="target">
+												<option  v-for="target in targets" :value="target" :key="target">
 													{{ target }}
 												</option>
 											</select>
@@ -62,25 +62,29 @@ import { useBudget } from '~~/stores/budgetStore';
 const { $showToast } = useNuxtApp();
 const storeBudget = useBudget()
 
-const budget = reactive({
-	targetName: null,
-	targetAmount: null,
+const emit = defineEmits(['refresh-history'])
+
+const expense = reactive({
+	expenseName: null,
+	expenseAmount: null,
 	relatedTarget: null
 })
 
-const targets = reactive(storeBudget.getTargetNames)
-
+let targets = reactive([])
 
 const displayModal = ref(false);
 
 const openModal = () => {
-	test()
+	targets = storeBudget.getTargetNames
+	expense.expenseName= null,
+	expense.expenseAmount= null,
+	expense.relatedTarget= null
 	displayModal.value = true;
-	console.log({targets})
-	console.log({tests})
 };
 const closeModal = () => {
 	displayModal.value = false;
+	storeBudget.setExpense(expense)
+	emit('refresh-history')
 };
 
 

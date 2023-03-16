@@ -68,7 +68,7 @@ const closeModal = () => {
 
 const saveTarget = () => {
 	if (budget.targetName && budget.targetAmount) {
-		$showToast(`Budget for  : ${budget.targetName} added !`, "success", 2500);
+		$showToast(`Budget for  : ${budget.targetName} added !`, "success", 1500);
 		budget.targetSaved = budget.targetAmount
 		storeBudget.setBudget(budget)
 		emit('refresh-income')

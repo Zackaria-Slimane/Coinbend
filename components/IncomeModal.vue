@@ -60,7 +60,7 @@ const closeModal = () => {
 
 const saveIncome = () => {
 	if (income.value) {
-		$showToast(`Income of  : ${income.value} saved !`, "success", 2500);
+		$showToast(`Income of  : ${income.value} added !`, "success", 1500);
 		storeBudget.setIncome(income.value)
 		emit('add-income')
 		closeModal()

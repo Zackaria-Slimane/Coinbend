@@ -6,32 +6,39 @@ export const useBudget = defineStore("budgetStore", {
 		return {
 			budgetName: null,
 			income: null,
-			budgetData: null || [],
-			targetNames: null || []
+			targetsData: null || [],
+			targetNames: null || [],
+			expensesData: null || [],
+			expenseNames: null || [],
 		}
 	},
 	actions: {
 		setBudget(newBudget) {
-			this.budgetData.push({ ...newBudget })
+			this.targetsData.push({ ...newBudget })
 			this.targetNames.push(newBudget.targetName)
-			localStorage.setItem("budget", JSON.stringify(this.budgetData))
+			localStorage.setItem("targets", JSON.stringify(this.budgetData))
 		},
 		setIncome(newIncome) {
 			this.income = newIncome
+		},
+		setExpense(newExpense) {
+			this.expensesData.push({ ...newExpense })
 		}
 	},
 	getters: {
 		getBudget: (state) => {
-			return state.budgetData;
+			return state.targetsData;
 		},
-
+		getExpenses: (state) => {
+			return state.expensesData;
+		},
 		getIncome: (state) => {
 			return state.income;
 		},
 
 		getLeftToSpend: (state) => {
 			let targets = []
-			state.budgetData.forEach((budget) => {
+			state.targetsData.forEach((budget) => {
 				targets.push(+budget.targetAmount)
 			})
 			let totalAmounts = targets.reduce((a, b) => a + b, 0)
@@ -41,10 +48,18 @@ export const useBudget = defineStore("budgetStore", {
 
 		getTargetNames: (state) => {
 			let results = []
-			state.budgetData.forEach((budget) => {
-				results.push(budget.targetName)
+			state.targetsData.forEach((target) => {
+				results.push(target.targetName)
 			})
 			state.targetNames = results
+			return results
+		},
+		getExpensesNames: (state) => {
+			let results = []
+			state.expensesData.forEach((expense) => {
+				results.push(expense.expenseName)
+			})
+			state.expenseNames = results
 			return results
 		}
 	},

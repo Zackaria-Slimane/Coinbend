@@ -221,7 +221,7 @@
 								<div class="my-8 flex gap-2">
 									<IncomeModal @add-income="getIncome"/>
 									<TargetModal @refresh-income="refreshIncome" />
-									<ExpenseModal />
+									<ExpenseModal @refresh-history="getHistory"/>
 								</div>
 								<div>
 									<p>
@@ -233,6 +233,7 @@
 								</div>
 							</div>
 							<MainTable class="my-12" />
+							<TimeLine :expenses="expenseHistory"/>
 						</div>
 
 					</div>
@@ -253,7 +254,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref,reactive, onMounted } from 'vue'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { ChartBarIcon, FolderIcon, HomeIcon, InboxIcon, XMarkIcon, Bars3Icon } from '@heroicons/vue/24/outline/index.js'
 import { useBudget } from '~~/stores/budgetStore'
@@ -268,6 +269,7 @@ const { $showToast } = useNuxtApp();
 
 const budgetStore = useBudget()
 let budgetAmount = ref(budgetStore.getIncome)
+let expenseHistory = reactive(budgetStore.getExpensesNames)
 
 onMounted(() => {
 	setTimeout(() => {
@@ -317,6 +319,9 @@ function getIncome(){
 }
 function refreshIncome(){
 	budgetAmount.value = budgetStore.getLeftToSpend
+}
+function getHistory(){
+expenseHistory.values = budgetStore.getExpensesNames
 }
 
 </script>
