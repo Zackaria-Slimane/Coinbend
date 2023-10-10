@@ -16,8 +16,9 @@
 		"nuxt-headlessui": "^1.0.4"
 	},
 	"dependencies": {
-		"@heroicons/vue": "^2.0.13",
-		"@pinia/nuxt": "^0.4.11",
+		"@heroicons/vue": "^2.0.18",
+		"@pinia/nuxt": "^0.4.7",
+
 		"pinia": "^2.0.32",
 		"primeicons": "^6.0.1",
 		"primevue": "^3.32.0",
